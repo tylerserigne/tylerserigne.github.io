@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+	
 	<meta charset="utf-8">
-	<title>Bouncing Box</title>
+	<title>Tyler's Box</title>
 	<script src="jquery.min.js"></script>
 	<style>
 		.box {
@@ -17,6 +18,10 @@
 			left: 0px;  /* <--- Change me! */
 		}
 		.board{
+
+			background-image: url("images/sock court 6.png");
+ 			background-color: #cccccc;
+
 			height: 100vh;
 		}
 	</style>
@@ -25,6 +30,7 @@
 </head>
 <body class="board">
 	<!-- HTML for the box -->
+
 	<div class="box">?</div>
 
 	<script>
@@ -41,21 +47,16 @@
 			var boardWidth = board.width();	// the maximum X-Coordinate of the screen
 
 			// Every 50 milliseconds, call the update Function (see below)
-			setInterval(update, 50);
+			setInterval(update, 5);
 			
 			// Every time the box is clicked, call the handleBoxClick Function (see below)
 			box.on('click', handleBoxClick);
 
 			// moves the Box to a new position on the screen along the X-Axis
-			function moveBoxTo(newPositionX) {
-				box.css('text
+			function moveBoxTo(newPositionX,newPositionY) {
+				box.css('left', newPositionX);
+				box.css('top', newPositionY);
 				
-				
-				
-				
-				
-				
-				', newPositionX20);
 			}
 
 			// changes the text displayed on the Box
@@ -63,14 +64,26 @@
 				box.text(newText);
 			}
 
+			
+
 			//////////////////////////////////////////////////////////////////
 			/////////////////// YOUR CODE BELOW HERE /////////////////////////
 			//////////////////////////////////////////////////////////////////
 			
 			// TODO 2 - Variable declarations 
 			
+            var positionX = 0;
+			var positionY = 200;
+			var boxText = 0;
+			var speedX = 1;
+			var speedY = 1;
+			var level1 = 10;
+			var level2 = 20;
+			var level3 = 30;
+			var level4 = 40;
+			var level5 = 50;
+			var text = coconut;
 
-			
 			/* 
 			This Function will be called 20 times/second. Each time it is called,
 			it should move the Box to a new location. If the box drifts off the screen
@@ -78,6 +91,24 @@
 			*/
 			function update() {
 				
+				moveBoxTo(positionX,positionY);
+				positionX = positionX + speedX;
+				positionY = positionY + speedY;
+				box.text(boxText)
+				if (positionX > 1825) {positionY - 100;}
+
+				if (positionY < 0) {speedY = 2;}
+				if (positionY > 895) {speedY = -2;}
+
+				if (positionX > 1825) {speedX = -20;}
+				if (positionX < 0) {speedX = 0.25;}
+				if (positionX > 1820) {boxText = boxText - 1;}
+				//Level Conditions
+				if (boxText >= level1) {speedX + level1};
+				if (boxText >= level2) {speedX + level2};
+				if (boxText >= level3) {speedX + level3};
+				if (boxText >= level4) {speedX + level4};
+				if (boxText > level5) { boxText = "Winner"};
 
 			};
 
@@ -86,12 +117,19 @@
 			it should increase the points total, increase the speed, and move the box to
 			the left side of the screen.
 			*/
-			function handleBoxClick() {
-				
-
-
+						function handleBoxClick() {
+				boxText = boxText + 1;
+				speedX = speedX + 0.2;
+				if (positionX > 1600) {positionX = 100;}
+				if (positionY > 450) {speedY = -1;}
+				if (positionY < 450) {speedY = 1;}
 			};
 		})();
+		
 	</script>
+
+Every 10 points makes the game harder, once you reach 50 you win, dont let it touch the right wall or youll lose points, click it behind the red wall and youll get it back, works better if you use F11
 </body>
+</html>
+
 </html>
