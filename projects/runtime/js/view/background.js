@@ -79,7 +79,7 @@ var background = function (window) {
             tree.x = canvasWidth - 250;
             tree.y = groundY - 185;
             background.addChild(tree);
-
+            
 
         } // end of render function - DO NOT DELETE
         
@@ -99,7 +99,7 @@ var background = function (window) {
             
             
             // TODO 4: Part 2 - Move the tree!
-            tree.x = tree.x + -3;
+            tree.x = tree.x - 3;
 
             if(tree.x < -200) {
                 tree.x = canvasWidth;
@@ -107,7 +107,13 @@ var background = function (window) {
             
             
             // TODO 5: Part 2 - Parallax
+            for (var i = 0; i < buildings.length;i++){
+                buildings[i].x = buildings[i].x - 2;
 
+                if(buildings[i].x < -150) {
+                    buildings[i].x = canvasWidth;
+                }               
+            }
 
         } // end of update function - DO NOT DELETE
         
