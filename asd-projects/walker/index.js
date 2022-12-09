@@ -16,6 +16,10 @@ function runProgram(){
     "RIGHT": 39,
     "UP": 38,
     "DOWN": 40,
+    "A": 65,
+    "W": 87,
+    "S": 83,
+    "D": 68,
   }
 
   var positionX = 0;
@@ -31,6 +35,8 @@ function runProgram(){
   var interval = setInterval(newFrame, FRAMES_PER_SECOND_INTERVAL);   // execute newFrame every 0.0166 seconds (60 Frames per second)
   $(document).on('keydown', handleKeyDown);
   $(document).on('keyup', handleKeyUp);
+  $(document).on('keydown2', handleKeyDown2);
+  $(document).on('keyup2', handleKeyUp2);
                              // change 'eventType' to the type of event you want to handle
 
 
@@ -46,6 +52,7 @@ function runProgram(){
   function newFrame() {
     redrawGameItem();
     repositionGameItem();
+    checkLocation();
   }
   
   /* 
@@ -54,26 +61,49 @@ function runProgram(){
 
   function handleKeyDown(event) {
       if (event.which === KEY.LEFT){
-        console.log("LEFT Pressed")
           speedX = -5;
       }
 
       if (event.which === KEY.RIGHT){
-        console.log("RIGHT Pressed")
           speedX = 5;
     }
       if (event.which === KEY.UP){
-        console.log("UP Pressed")
         speedY = -5;
 
     }
       if (event.which === KEY.DOWN){
-        console.log("DOWN Pressed")
           speedY = 5;
     };
 
   }
+  function handleKeyDown2(event) {
+    if (event.which === KEY.A){
+        speedX = -5;
+    }
 
+    if (event.which === KEY.D){
+        speedX = 5;
+  }
+    if (event.which === KEY.W){
+      speedY = -5;
+
+  }
+    if (event.which === KEY.S){
+        speedY = 5;
+  };
+
+}
+  function handleKeyUp(event) {
+
+      if (event.which === KEY.LEFT || event.which === KEY.RIGHT){
+          speedX = 0;
+      }
+
+      if (event.which === KEY.UP || event.which === KEY.DOWN){
+        speedY = 0;
+
+    }
+  }
 
   ////////////////////////////////////////////////////////////////////////////////
   ////////////////////////// HELPER FUNCTIONS ////////////////////////////////////
@@ -96,7 +126,28 @@ function runProgram(){
   function redrawGameItem(){
     $("#walker").css("left",positionX);
     $("#walker").css("top",positionY);
+    $("#walker2").css("left2",positionX);
+    $("#walker2").css("top2",positionY);
   };
+
+  function checkLocation(){
+      if (positionX > 400){
+        speedX = -5;
+        console.log(speedX);
+
+      }
+
+      if (positionX < 0){
+        speedX = 5;
+      }
+      if (positionY < 0){
+        speedY = 5;
+        console.log(speedY)
+      }
+      if (positionY > 400){
+        speedY = -5;
+      }
+  }
 
 
 }
