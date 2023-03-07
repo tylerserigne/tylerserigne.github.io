@@ -131,20 +131,18 @@ function runProgram(){
   };
 
   function checkLocation(){
-      if (positionX > 400){
+      if (positionX >= 400){
         speedX = -5;
         console.log(speedX);
-
       }
-
-      if (positionX < 0){
+      if (positionX <= 0){
         speedX = 5;
       }
-      if (positionY < 0){
+      if (positionY <= 0){
         speedY = 5;
         console.log(speedY)
       }
-      if (positionY > 400){
+      if (positionY >= 400){
         speedY = -5;
       }
   }
