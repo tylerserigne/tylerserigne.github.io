@@ -22,6 +22,8 @@ function runProgram(){
       "DOWN": 40,
       "W": 87,
       "S": 83,
+      "minus": 56,
+      "plus": 57,
     }
   // Game Item Objects
 
@@ -88,7 +90,13 @@ function runProgram(){
       paddleRight.speedY = 5;
 
 };
- }
+    if (event.which === KEY.plus){
+      ball.speedX = ball.speedX + 20;
+    }
+    if (event.which === KEY.minus){
+  ball.speedX = ball.speedX - 20;
+}
+}
 
  function handleKeyUp(event) {
 
@@ -98,6 +106,7 @@ function runProgram(){
   if (event.which === KEY.UP || event.which === KEY.DOWN){
     paddleRight.speedY = 0;
 }
+
 }
 
   function handleEvent(event) {
@@ -186,7 +195,13 @@ function doCollide(paddle,ball){
     ball.bottomY > paddle.topY &&
     ball.topY < paddle.bottomY){
 
-    ball.speedX = ball.speedX * -2;
+    ball.speedX = ball.speedX * -1;
+      if (ball.speedX < 0){
+        ball.speedX = ball.speedX - 2;
+      }
+      if (ball.speedX > 0){
+        ball.speedX = ball.speedX + 2;
+      }
     console.log(ball.speedX);
     ball.speedX = ball.speedX ;
   }
@@ -196,6 +211,12 @@ function doCollide(paddle,ball){
 
 
 }
+
+//cheats 
+
+
+
+
 //function that changes ball's speed
 
 //function that will handle what happens when the ball hits the paddle
